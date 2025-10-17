@@ -1,0 +1,70 @@
++++-Register/Login için class olusturulacak
+    +++-Login içerisindeki auth ile alınan verileri JSON ile alınmasını sağla -Ferhat d_250423
+
++++Takvim sayfası yapılacak (Bu sayfaya oyun tarihleri azalan şekilde gönderilecek (Mevcut ay içerisindeki), Birden çok seans gönderme ?)
+
++++-Yetki sorgulama wrapper +0
+    ???-Birden çok yetki seviyesi olacağı için bunları da sorgulaman gerekiyor -Ferhat d_250423
+
+?-Oyun düzenleme ve oyun silme endpointleri
+
+?-Kayıt sonrası onay maili
+
+not- oyunların date added verileri front ende gönderilmeyecek.
+
+birden çok koltuk alan kullanıcı için ayrı ayrı bilet bastırma.
+
+koltuk alınınca alınan koltuğu seats_available'dan düş.
+ |_ Kullanıcı birden fazla koltuk alabilecek bu koltukları ayrı ayrı yerlerine göre alınmış sekmesine ekle.
+
+sahne ekibi ve oyuncu listesi eklenecek.
+
+oyun aktifleştirme eklenecek.
+oyunlara fotoğrafların isimlerinin olduğu bir liste ekle.
+
+17-05-2023
+düzenleme (tüm veriler değiştirilmiyorsa) -> patch request 
+silme -> delete request
+
+Oyun silme
+|_ Delete request
+  |_ Kod: 
+    row_to_delete = db.session.query(ShowModel).filter_by(id = show_id).first()
+    if row_to_delete:
+        session.delete(row_to_delete)
+        session.commit()
+        return make_response(jsonify({"message": "Game deleted succesfully !"}))
+    else:
+        return make_response(jsonify("message": "Game couldn't be deleted."))
+
+fotoğraf silme
+|_ Delete request
+
+kullanıcı silme
+|_ Delete request
+  |__ Kod:
+  row_to_delete = db.session.query(UserModel).filter_by(public_id = user_id).first()
+  if row_to_delete:
+    session.delete(row_to_delete)
+    session.commit()
+    return make_response(jsonify({"message": "User deleted succesfully!"}))
+  
+  else:
+    return make_response(jsonify({"message": "User couldn't be deleted."}))
+
+seans düzenleme
+|_ Patch request
+  |_ Kod:
+
+
+oyun düzenleme
+|_ Patch request
+
+oyun aktif etme/ya da deaktif etme
+|_ Patch request 
+
+Buyticket bilet fiyatını koltuk sayısı ile çarp
+
+tür 
+başlangıç-bitiş
+ücret

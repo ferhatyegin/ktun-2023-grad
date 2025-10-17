@@ -1,0 +1,9 @@
+#Merge branches without overwriting
+- git fetch origin
+- git pull origin BACK-END
+
+#Database Migration
+flask --app main db init
+flask --app main db stamp head
+flask --app main db migrate -m "Migration"
+flask --app main db upgrade
